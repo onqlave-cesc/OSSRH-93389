@@ -1,22 +1,16 @@
 name: Maven Deploy
 on:
-  workflow_dispatch:
-    inputs:
-      description: 'The branch to build'
-      required: true
-      version:
-        description: 'Release Version (Ex: 1.0.0)'
-        required: true
+  push:
+    tags:
+      - "*"
 jobs:
   deploy:
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/')
     steps:
       - uses: actions/checkout@v3
       - name: Get Tag Version
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-
-
+        run:  echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
