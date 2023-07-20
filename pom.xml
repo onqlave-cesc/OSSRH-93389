@@ -6,7 +6,7 @@
 
     <groupId>io.github.onqlave-cesc</groupId>
     <artifactId>aes-cipher</artifactId>
-    <version>1.1</version>
+    <version>${RELEASE_VERSION}</version>
 
     <name>aes-cipher</name>
     <description>A demo for deployment to the Central Repository via OSSRH</description>
